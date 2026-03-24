@@ -5,7 +5,7 @@ dicionario = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
 marker = cv2.aruco.generateImageMarker(dicionario, 4, 200)
 
 # Canvas maior: marker + régua ao lado
-canvas = np.ones((200, 500), dtype=np.uint8) * 255
+canvas = np.ones((200, 400), dtype=np.uint8) * 255
 canvas[0:200, 0:200] = marker
 
 # Régua: traços a cada 50px = 1cm (se impresso a 50px/cm = 127dpi)
