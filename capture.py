@@ -6,7 +6,7 @@ FOTO_PATH = "/data/data/com.termux/files/home/frame.jpg"
 
 def capturar_frame(camera=0):
     result = subprocess.run(
-        ["termux-camera-photo", "-c", str(camera), FOTO_PATH],
+        ["termux-camera-photo", "-c", str(camera), "-s", "3264x1836", FOTO_PATH],
         capture_output=True,
         text=True,
         timeout=10
