@@ -16,7 +16,7 @@ ID_REGUA = 4
 CM_REGUA = 5.0  # distância conhecida entre início e fim da régua em cm
 
 def capturar():
-    subprocess.run(["termux-camera-photo", "-c", "0", FOTO_PATH],
+    subprocess.run(["termux-camera-photo", "-c", "2", FOTO_PATH],
                    capture_output=True, timeout=10)
     return cv2.imread(FOTO_PATH)
 
