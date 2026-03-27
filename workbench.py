@@ -33,12 +33,21 @@ def centro(corners):
     return corners.mean(axis=0)
 
 def aplicar_homografia(frame, markers):
-    # Pega o centro de cada marker de canto na ordem definida
+    # Usa o canto externo de cada marker (não o centro)
+    # Ordem dos cantos de cada marker: [top-left, top-right, bottom-right, bottom-left]
+    # Pega o canto que aponta "para fora" da bancada em cada posição
+    
+    canto_externo = {
+        ORDEM_CANTOS[0]: 0,  # marker top-left     → seu canto top-left     (índice 0)
+        ORDEM_CANTOS[1]: 1,  # marker top-right    → seu canto top-right    (índice 1)
+        ORDEM_CANTOS[2]: 2,  # marker bottom-right → seu canto bottom-right (índice 2)
+        ORDEM_CANTOS[3]: 3,  # marker bottom-left  → seu canto bottom-left  (índice 3)
+    }
+
     pts_src = np.array([
-        centro(markers[id]) for id in ORDEM_CANTOS
+        markers[mid][canto_externo[mid]] for mid in ORDEM_CANTOS
     ], dtype=np.float32)
 
-    # Tamanho da imagem de saída (bancada retificada)
     W, H = 800, 600
     pts_dst = np.array([
         [0, 0], [W, 0], [W, H], [0, H]
