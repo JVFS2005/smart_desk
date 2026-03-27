@@ -24,7 +24,7 @@ def capturar_frame(camera=0):
 
 def main():
     print("Capturando frame via Termux:API...")
-    frame = capturar_frame(camera=0)
+    frame = capturar_frame(camera=2)
     
     altura, largura = frame.shape[:2]
     print(f"Frame capturado: {largura}x{altura} pixels")
