@@ -48,7 +48,7 @@ def aplicar_homografia(frame, markers):
         markers[mid][canto_externo[mid]] for mid in ORDEM_CANTOS
     ], dtype=np.float32)
 
-    W, H = 800, 600
+    W, H = 1320, 560
     pts_dst = np.array([
         [0, 0], [W, 0], [W, H], [0, H]
     ], dtype=np.float32)
