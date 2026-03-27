@@ -6,7 +6,7 @@ FOTO_PATH = "/data/data/com.termux/files/home/frame.jpg"
 
 def capturar_frame(camera=0):
     result = subprocess.run(
-        ["termux-camera-photo", "-c", str(camera), "-s", "3264x1836", FOTO_PATH],
+        ["termux-camera-photo", "-c", str(camera), "-s", "2576x1932", FOTO_PATH],
         capture_output=True,
         text=True,
         timeout=10
@@ -24,7 +24,7 @@ def capturar_frame(camera=0):
 
 def main():
     print("Capturando frame via Termux:API...")
-    frame = capturar_frame(camera=0)
+    frame = capturar_frame(camera=2)
     
     altura, largura = frame.shape[:2]
     print(f"Frame capturado: {largura}x{altura} pixels")
