@@ -13,7 +13,7 @@ DETECTOR = cv2.aruco.ArucoDetector(DICIONARIO, PARAMETROS)
 # (ajuste a ordem conforme você colou na bancada)
 ORDEM_CANTOS = [0, 1, 2, 3]
 ID_REGUA = 4
-CM_REGUA = 5.0  # distância conhecida entre início e fim da régua em cm
+CM_REGUA = 8.466  # distância conhecida entre início e fim da régua em cm
 
 def capturar():
     subprocess.run(["termux-camera-photo", "-c", "2", FOTO_PATH],
