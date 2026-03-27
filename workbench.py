@@ -25,7 +25,9 @@ def detectar_markers(frame):
     cantos, ids, _ = DETECTOR.detectMarkers(cinza)
     if ids is None:
         return {}
-    return {int(ids[i]): cantos[i][0] for i in range(len(ids))}
+    # ids vem como array 2D [[0], [3], ...], flatten resolve
+    ids_flat = ids.flatten()
+    return {int(ids_flat[i]): cantos[i][0] for i in range(len(ids_flat))}
 
 def centro(corners):
     return corners.mean(axis=0)
@@ -87,6 +89,18 @@ def main():
     print("Detectando markers...")
     markers = detectar_markers(frame)
     print(f"Markers encontrados: {list(markers.keys())}")
+
+    # Diagnóstico: salva imagem com markers desenhados
+    debug = frame.copy()
+    if markers:
+        for mid, corners in markers.items():
+            pts = corners.astype(int)
+            cv2.polylines(debug, [pts], True, (0, 255, 0), 2)
+            cx, cy = pts.mean(axis=0).astype(int)
+            cv2.putText(debug, f"ID:{mid}", (cx, cy),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+    cv2.imwrite("/data/data/com.termux/files/home/debug.jpg", debug)
+    print(f"Debug salvo em debug.jpg")
 
     ids_necessarios = set(ORDEM_CANTOS + [ID_REGUA])
     faltando = ids_necessarios - set(markers.keys())
